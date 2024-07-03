@@ -29,14 +29,14 @@ class LoginController extends Controller
                         'status' => true,
                         'token' => $token,
                         'user' => $user,
-                    ], Response::HTTP_CREATED
+                    ], Response::HTTP_OK
                 );
             }
             return response()->json(
                 [
                     'status' => false,
                     'message' => 'Login ou senha incorreta.',
-                ], Response::HTTP_NOT_FOUND
+                ], Response::HTTP_UNPROCESSABLE_ENTITY
             );
 
         } catch (Exception $e) {

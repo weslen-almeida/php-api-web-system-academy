@@ -1,0 +1,50 @@
+<?php
+
+use App\Models\User;
+
+use function Pest\Laravel\postJson;
+
+// test('should create user', function () {
+//     $data = [
+//         'email' => '',
+//         'password' => '',
+//     ];
+//     postJson('/create', $data)->dump();
+// });
+
+
+test('should auth user', function () {
+    // Factory, cria usuario fake
+    $user = User::factory()->create();
+
+    $data = [
+        'email' => $user->email,
+        'password' => 'password',
+    ];
+
+    postJson(route('auth.login'), $data)
+        ->assertOk()
+        ->assertJsonStructure(['token', 'status']);
+});
+
+test('should fail auth user', function () {
+    // Factory, cria usuario fake
+    $user = User::factory()->create();
+
+    $data = [
+        'email' => $user->email,
+        'password' => 'email',
+    ];
+
+    postJson(route('auth.login'), $data)
+        ->assertStatus(422)
+        ->assertJsonStructure(['status']);
+});
+
+
+
+
+
+// it('show return status code 200', fn() => getJson('/login')->assertOk());
+
+// it('get all user', fn() => getJson('/user')->assertStatus(201));

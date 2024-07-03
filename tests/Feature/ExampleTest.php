@@ -5,15 +5,19 @@ namespace Tests\Feature;
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
-    {
-        $response = $this->get('/');
+use function Pest\Laravel\getJson;
 
-        $response->assertStatus(200);
-    }
-}
+// Padrão Unit dentro de classe
+// class ExampleTest extends TestCase
+// {
+//     public function test_the_application_returns_a_successful_response(): void
+//     {
+//         $response = $this->get('/');
+
+//         $response->assertStatus(200);
+//     }
+// }
+
+// Padrão Pest, não precisa estar dentro de classe
+it('test_the_application_returns_a_successful_respons', fn() => getJson('/')->assertOk());
+
