@@ -27,8 +27,7 @@ test('should auth user', function () {
         ->assertJsonStructure(['token', 'status']);
 });
 
-test('should fail auth user', function () {
-    // Factory, cria usuario fake
+it('should fail auth user', function () {
     $user = User::factory()->create();
 
     $data = [
