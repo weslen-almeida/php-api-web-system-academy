@@ -11,26 +11,23 @@ class WebHookController extends Controller
     {
         $data = $request->all();
 
-        // delay de uns 10 segundos e chamar a função abaixo
-
-        return $this->sendResponses();
+        sleep(10);
+        return $this->sendResponses($data);
     }
 
-    public function sendResponses()
+    public function sendResponses($data)
     {
-        //url para enviar a requisição depois de processada
-        $uri = '';
-
-        $data = [
-            'id' => '1234456',
-            'name' =>  'fulano de tal'
-        ];
-
+        $uri = $data['url'];
         $dataSend =json_encode(
             [
                 'status' => true,
                 'message' => 'Evento processado com sucesso',
-                'data' => $data,
+                'data' => [
+                    'id' => 1234456,
+                    'name' =>  $data['name'],
+                    'email' => $data['email'],
+                    'token' => 'Teste52321'
+                ],
             ], Response::HTTP_CREATED
         );
 
