@@ -31,6 +31,8 @@ class WebHookController extends Controller
             ], Response::HTTP_CREATED
         );
 
+        // inserir uma fila para controle
+        // na fila fazer o retry
         $client = new \GuzzleHttp\Client([
             'headers' => ['Content-Type' => 'application/json', 'Accept' => 'application/json',]
         ]);
